@@ -4,6 +4,7 @@ services:
     environment:
       - PORT=8000
       - DATABASE_URL=mssql://CloudSAe8df3302:${DB_PASSWORD}@nexum.database.windows.net:1433/Nexum?encrypt=true&trustServerCertificate=false&connection_timeout=30
+      - WEBSITE_HOSTNAME=nexumai.azurewebsites.net
     ports:
       - "8000:8000"
     restart: always
@@ -21,6 +22,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_SSL=true
       - NODE_ENV=production
+      - WEBSITE_HOSTNAME=nexumai.azurewebsites.net
     ports:
       - "8080:8080"
     restart: always
