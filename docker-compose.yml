@@ -20,26 +20,37 @@ services:
   budibase:
     image: witwolfvic/budibase:latest
     environment:
-      - PORT=8080
-      - DISABLE_COUCH_DB=true
-      - SQL_CONNECTION_STRING=Server=tcp:nexum.database.windows.net,1433;Initial Catalog=Nexum;Persist Security Info=False;User ID=CloudSAe8df3302;Password=${DB_PASSWORD};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30
-      - SQL_TYPE=mssql
-      - NODE_ENV=production
-      - SELF_HOSTED=1
-      - JWT_SECRET=${JWT_SECRET}
-      - PLATFORM_URL=http://localhost:8080
-      - WORKER_URL=http://localhost:8080
+      # Primary Database Config
+      - BB_STORE_TYPE=MSSQL
+      - MSSQL_CONNECTION_STRING=Server=tcp:nexum.database.windows.net,1433;Initial Catalog=Nexum;Persist Security Info=False;User ID=CloudSAe8df3302;Password=${DB_PASSWORD};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30
+      # Disable CouchDB
+      - DISABLE_STORE_TYPE=COUCH
+      - COUCH_DB_ENABLED=false
+      - COUCH_DB_URL=
+      - COUCH_DB_USERNAME=
+      - COUCH_DB_PASSWORD=
+      # Disable Optional Services
       - MINIO_ENABLED=false
       - REDIS_ENABLED=false
-      - CLUSTER_MODE=false
+      - DISABLE_ACCOUNT_PORTAL=true
+      # Core Settings
+      - PORT=8080
+      - JWT_SECRET=${JWT_SECRET}
+      - NODE_ENV=production
+      - DEPLOYMENT_ENVIRONMENT=PRODUCTION
+      # Azure Configuration  
       - WEBSITES_ENABLE_APP_SERVICE_STORAGE=false
       - WEBSITE_SITE_NAME=NexumAI
       - WEBSITE_AUTH_ENABLED=False
+      - PLATFORM_URL=https://nexumai.azurewebsites.net
+      - WORKER_URL=https://nexumai.azurewebsites.net
+      - APPS_URL=https://nexumai.azurewebsites.net
     ports:
-      - "8080:8080"
+      - "8080:8080"  
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    restart: always
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    restart: unless-stopped
