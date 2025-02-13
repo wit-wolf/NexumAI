@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:  # Allow manual triggers
 
 jobs:
   build-and-deploy:
@@ -33,3 +34,8 @@ jobs:
           images: |
             witwolfvic/python-api:latest
             witwolfvic/budibase:latest
+
+      - name: Check deployment status
+        run: |
+          echo "Checking deployment status..."
+          curl -s https://nexumai-e2aeasa8a7d7ggcv.southafricanorth-01.azurewebsites.net/health || true

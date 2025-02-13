@@ -14,6 +14,12 @@ services:
       - PORT=8080
       - BUDIBASE_CONFIG__DB__N=1
       - BUDIBASE_CONFIG__DB__PARTITIONED=false
+      - COUCH_DB_USER=admin
+      - COUCH_DB_PASSWORD=admin
+      - COUCH_DB_URL=http://localhost:5984
+      - SINGLE_NODE=true
+      - NODE_ENV=production
+      - JWT_SECRET=generate_a_random_secret
     ports:
       - "8080:8080"
     restart: always
