@@ -5,8 +5,16 @@ services:
       - PORT=8000
       - DATABASE_URL=mssql://CloudSAe8df3302:${DB_PASSWORD}@nexum.database.windows.net:1433/Nexum?encrypt=true&trustServerCertificate=false&connection_timeout=30
       - WEBSITE_HOSTNAME=nexumai.azurewebsites.net
+      - WEBSITES_ENABLE_APP_SERVICE_STORAGE=false
+      - WEBSITE_SITE_NAME=NexumAI
+      - WEBSITE_AUTH_ENABLED=False
     ports:
       - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     restart: always
 
   budibase:
@@ -23,6 +31,15 @@ services:
       - DB_SSL=true
       - NODE_ENV=production
       - WEBSITE_HOSTNAME=nexumai.azurewebsites.net
+      - WEBSITES_ENABLE_APP_SERVICE_STORAGE=false
+      - WEBSITE_SITE_NAME=NexumAI
+      - WEBSITE_AUTH_ENABLED=False
+      - BUDIBASE_ENVIRONMENT=PRODUCTION
     ports:
       - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     restart: always
