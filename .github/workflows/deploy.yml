@@ -1,0 +1,35 @@
+name: Deploy to Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_REGISTRY_SERVER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_REGISTRY_SERVER_USERNAME }} --password-stdin
+
+      - name: Build and push Docker images
+        run: |
+          docker build -t witwolfvic/python-api:latest ./api
+          docker push witwolfvic/python-api:latest
+          docker pull budibase/budibase:latest
+          docker tag budibase/budibase:latest witwolfvic/budibase:latest
+          docker push witwolfvic/budibase:latest
+
+      - name: Deploy to Azure
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: NexumAI
+          slot-name: production
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: |
+            witwolfvic/python-api:latest
+            witwolfvic/budibase:latest
