@@ -2,16 +2,21 @@
 
 ## Source
 - **Source:** GitHub Actions
+- **Organization:** wit-wolf
+- **Repository:** NexumAI
+- **Branch:** main
 
 ## Registry Settings
-- **Container type:** Docker Compose
-- **Registry source:** GitHub
-- **Server URL:** https://github.com/wit-wolf/NexumAI
-- **Login:** Your GitHub username
-- **Password:** Your GitHub personal access token (PAT)
+- **Build provider:** GitHub Actions
+- **Server URL:** https://index.docker.io/v1
+- **Login:** witwolfvic
+- **Password:** Your Docker Hub password or personal access token (PAT)
 
-## Full Image Name and Tag
-- **Full Image Name and Tag:** https://github.com/wit-wolf/NexumAI/docker-compose.yml
+## Image Names and Tags
+- **Image name for python-api:** witwolfvic/python-api
+- **Tag for python-api:** latest
+- **Image name for budibase:** witwolfvic/budibase
+- **Tag for budibase:** latest
 
 ## Startup File or Command
 - **Startup file or command:** (Leave blank or specify if needed)
