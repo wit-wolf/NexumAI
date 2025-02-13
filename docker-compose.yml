@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   python-api:
     build:
@@ -17,4 +16,10 @@ services:
       - PORT=8080
     ports:
       - "8080:8080"
+    restart: always
+
+  sidecar:
+    image: your_sidecar_image_source_here  # Replace with your actual sidecar image
+    environment:
+      - SIDE_SETTING=default_value  # Adjust environment variables as needed
     restart: always

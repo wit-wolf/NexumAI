@@ -1,3 +1,4 @@
-# ...existing code...
-git remote -v  # Check your remote URL
-git push origin main  # Push changes to the 'main' branch
+cd /d "c:\Users\werne\my-webapp\NexumAI"
+git add .
+git commit -m "Update Docker Compose setup for multi-container deployment"
+git push origin main
