@@ -42,9 +42,9 @@ services:
       - WEBSITES_ENABLE_APP_SERVICE_STORAGE=false
       - WEBSITE_SITE_NAME=NexumAI
       - WEBSITE_AUTH_ENABLED=False
-      - PLATFORM_URL=https://nexumai.azurewebsites.net
-      - WORKER_URL=https://nexumai.azurewebsites.net
-      - APPS_URL=https://nexumai.azurewebsites.net
+      - PLATFORM_URL=https://nexumai.southafricanorth-01.azurewebsites.net
+      - WORKER_URL=https://nexumai.southafricanorth-01.azurewebsites.net
+      - APPS_URL=https://nexumai.southafricanorth-01.azurewebsites.net
     ports:
       - "8080:8080"  
     healthcheck:
