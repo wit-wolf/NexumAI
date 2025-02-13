@@ -1,4 +1,4 @@
 cd /d "c:\Users\werne\my-webapp\NexumAI"
 git add .
-git commit -m "Update Docker Compose setup for multi-container deployment"
+git commit -m "Ensure Docker image names are lowercase"
 git push origin main
