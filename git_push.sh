@@ -1,0 +1,3 @@
+# ...existing code...
+git remote -v  # Check your remote URL
+git push origin main  # Push changes to the 'main' branch
