@@ -12,6 +12,8 @@ services:
     image: witwolfvic/budibase:latest  # Ensure this is all lowercase
     environment:
       - PORT=8080
+      - BUDIBASE_CONFIG__DB__N=1
+      - BUDIBASE_CONFIG__DB__PARTITIONED=false
     ports:
       - "8080:8080"
     restart: always
