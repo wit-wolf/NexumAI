@@ -1,25 +1,26 @@
 services:
   python-api:
-    image: witwolfvic/python-api:latest  # Ensure this is all lowercase
+    image: witwolfvic/python-api:latest
     environment:
       - PORT=8000
-      - DATABASE_URL=your_actual_azure_sql_connection_string  # Replace with your actual Azure SQL connection string
+      - DATABASE_URL=mssql://CloudSAe8df3302:${DB_PASSWORD}@nexum.database.windows.net:1433/Nexum?encrypt=true&trustServerCertificate=false&connection_timeout=30
     ports:
       - "8000:8000"
     restart: always
 
   budibase:
-    image: witwolfvic/budibase:latest  # Ensure this is all lowercase
+    image: witwolfvic/budibase:latest
     environment:
       - PORT=8080
-      - BUDIBASE_CONFIG__DB__N=1
-      - BUDIBASE_CONFIG__DB__PARTITIONED=false
-      - COUCH_DB_USER=admin
-      - COUCH_DB_PASSWORD=admin
-      - COUCH_DB_URL=http://localhost:5984
-      - SINGLE_NODE=true
+      - DB_TYPE=sql
+      - DB_DRIVER=mssql
+      - DB_URL=nexum.database.windows.net
+      - DB_PORT=1433
+      - DB_NAME=Nexum
+      - DB_USER=CloudSAe8df3302
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_SSL=true
       - NODE_ENV=production
-      - JWT_SECRET=generate_a_random_secret
     ports:
       - "8080:8080"
     restart: always
