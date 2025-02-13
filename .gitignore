@@ -1,0 +1,10 @@
+# Sensitive files
+azure_app_settings.json
+*.env
+*.env.*
+.env*
+
+# Local development
+node_modules/
+dist/
+*.log
