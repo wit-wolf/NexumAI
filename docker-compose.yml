@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  python-api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      - PORT=8000
+      - DATABASE_URL=your_azure_sql_connection_string
+    ports:
+      - "8000:8000"
+    restart: always
+
+  budibase:
+    image: budibase/budibase:latest
+    environment:
+      - PORT=8080
+    ports:
+      - "8080:8080"
+    restart: always
