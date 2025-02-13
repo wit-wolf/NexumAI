@@ -5,7 +5,7 @@ git remote -v
 REM Stage all changes
 git add .
 REM Commit changes with a message
-git commit -m "Your commit message here"
+git commit -m "Ensure Docker image names are lowercase"
 REM Push changes to the 'main' branch
 git push origin main
 pause
